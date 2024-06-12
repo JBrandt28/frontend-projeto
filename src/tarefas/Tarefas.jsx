@@ -33,7 +33,7 @@ function Tarefas() {
                 descricao: descricaoTarefaInputRef.current.value,
               
             };
-            fetch('http://localhost:4300/usuarios', {
+            fetch('http://localhost:4300/tarefas', {
                 method: 'POST',
                 headers: { "Content-type": 'application/json' },
                 body: JSON.stringify(novaTarefa)

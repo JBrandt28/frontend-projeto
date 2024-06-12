@@ -15,13 +15,20 @@ const Cadastrar = () => {
 
     useEffect(() => {
         axios.get('http://localhost:4300/usuarios')
-            .then(response => {
-                setListaUsuarios(response.data);
-            })
-            .catch(error => {
-                console.error('Erro ao buscar usuários:', error);
-            });
+    .then(response => {
+        if (Array.isArray(response.data)) {
+            setListaUsuarios(response.data);
+        } else {
+            console.error('A resposta da API não é um array:', response.data);
+        }
+    })
+    .catch(error => {
+        console.error('Erro ao buscar usuários:', error);
+    });
+
     }, []);
+    
+    
 
     function adicionaUsuario() {
         const usuario = {
@@ -78,17 +85,18 @@ const Cadastrar = () => {
                 <button type="submit">{modoEdicao ? "Salvar" : "Cadastrar"}</button>
             </form>
 
-            <div>
-                {listaUsuarios.map((usuario, index) => (
-                    <div key={usuario.id} style={{ display: 'flex', alignItems: 'center', margin: '10px' }}>
-                        <div style={{ flex: '1', marginRight: '10px', padding: '5px' }}>
-                            {usuario.primeiroNome} {usuario.ultimoNome} - {usuario.idade} anos - {usuario.email}
-                        </div>
-                        <button onClick={() => editarUsuario(index, usuario)}>Editar</button>
-                        <button onClick={() => excluirUsuario(usuario.id)}>Excluir</button>
-                    </div>
-                ))}
-            </div>
+            {/* <div>
+            {listaUsuarios.map((usuario, index) => (
+                <div key={usuario.id} style={{ display: 'flex', alignItems: 'center', margin: '10px' }}>
+                <div style={{ flex: '1', marginRight: '10px', padding: '5px' }}>
+                    {usuario.primeiro_nome} {usuario.ultimo_nome} - {usuario.idade} anos - {usuario.email}
+                </div>
+                    <button onClick={() => editarUsuario(index, usuario)}>Editar</button>
+                    <button onClick={() => excluirUsuario(usuario.id)}>Excluir</button>
+                </div>
+            ))}
+
+            </div> */}
 
             <Link to={'/login'}> <div>Login</div> </Link>
 
