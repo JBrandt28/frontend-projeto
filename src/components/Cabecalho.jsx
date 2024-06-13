@@ -12,24 +12,25 @@ const Cabecalho = () => {
     const navigate = useNavigate();
 
     const [theme, setTheme] = useState("light");
-
-
-    useEffect(() => {
-        fetch('http://localhost:4300/usuarios', {
-            method: 'GET'
-        }).then(a => a.json())
-        .then((a) => console.log(a))
-        .catch((a) => console.log(a));
-
-        fetch('http://localhost:4300/usuarios', {
-            method: 'POST',
-            headers: {"Content-type": 'application/json'},
-            body: JSON.stringify({descricao: 'teste'})
-        }).then(a => a.json())
-        .then((a) => console.log(a))
-        .catch((a) => console.log(a));
-      });
       
+      useEffect(() => {
+        // Requisição GET para buscar tarefas
+        fetch('http://localhost:4300/tarefas', {
+            method: 'GET'
+        }).then(response => response.json()) // Converte a resposta para JSON
+        .then(data => console.log(data)) // Exibe os dados no console
+        .catch(error => console.error(error)); // Trata qualquer erro que ocorra na requisição
+    
+        // Requisição POST para criar uma nova tarefa
+        fetch('http://localhost:4300/tarefas', {
+            method: 'POST',
+            headers: {"Content-type": 'application/json'}, // Define o cabeçalho da requisição
+            body: JSON.stringify({descricao: 'teste'}) // Converte os dados para JSON e os envia no corpo da requisição
+        }).then(response => response.json()) // Converte a resposta para JSON
+        .then(data => console.log(data)) // Exibe os dados no console
+        .catch(error => console.error(error)); // Trata qualquer erro que ocorra na requisição
+    }, []); // Array vazio como segundo argumento para garantir que o useEffect só seja executado uma vez, após a montagem do componente
+
     const toggleTheme = () => {
         if (theme === "light") {
             localStorage.setItem("theme", "dark");
