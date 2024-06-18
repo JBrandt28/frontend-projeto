@@ -6,6 +6,7 @@ import Inicio from './telas/Inicio.jsx';
 import Login from './telas/Login.jsx';
 import Cadastrar from './telas/Cadastrar.jsx';
 import Tarefas from './tarefas/Tarefas.jsx';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const rota = createBrowserRouter([
   {

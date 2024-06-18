@@ -1,47 +1,54 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { useHistory } from 'react-router-dom'; // Importação do useHistory
 
 const Login = () => {
-    const emailInputRef = useRef();
-    const senhaInputRef = useRef();
-    const [erro, setErro] = useState('');
-    const history = useHistory(); // Uso do useHistory
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
-    function fazerLogin() {
-        const email = emailInputRef.current.value;
-        const senha = senhaInputRef.current.value;
+  const handleLogin = async (event) => {
+    event.preventDefault();
+    try {
+      console.log("Login attempt with", { email, password });
+      const response = await axios.post('http://localhost:4300/login', {
+        email,
+        password,
+      });
 
-        axios.post('http://localhost:4300/login', { email, senha })
-            .then(response => {
-                localStorage.setItem('token', response.data.token); // Armazenar token de autenticação no localStorage
-                history.push('/tarefas'); // Redirecionar para a página de perfil após o login
-            })
-            .catch(error => {
-                setErro('Erro ao fazer login. Verifique suas credenciais.');
-                console.error('Erro ao fazer login:', error);
-            });
+      if (response.status === 200) {
+        console.log('Login successful');
+        navigate('/tarefas');
+      }
+    } catch (error) {
+      console.error('Login failed', error);
     }
+  };
 
-    return (
-        <div>
-            <h2>Login</h2>
-
-            <form onSubmit={(e) => { e.preventDefault(); fazerLogin(); }}>
-                <label>Email:</label>
-                <input type="email" ref={emailInputRef} name="email" />
-
-                <label>Senha:</label>
-                <input type="password" ref={senhaInputRef} name="senha" />
-
-                {erro && <p style={{ color: 'red' }}>{erro}</p>}
-
-                <br />
-                <br />
-                <button type="submit">Login</button>
-            </form>
-        </div>
-    );
+  return (
+    <div>
+      <h2>Login</h2>
+      <form onSubmit={handleLogin}>
+        <label>
+          Email:
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </label>
+        <label>
+          Password:
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </label>
+        <button type="submit">Login</button>
+      </form>
+    </div>
+  );
 };
 
 export default Login;
