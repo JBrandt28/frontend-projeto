@@ -1,0 +1,66 @@
+/* CSS do arquivo Cabecalho.jsx */
+.tituloCabecalho {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 150px;
+    font-family: fantasy;
+    color: red;
+    padding-top: 200px;
+}
+
+/* CSS do arquivo Tarefa.jsx */
+.container {
+    display: flex;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.containerDescricaoEGrafico {
+    flex: 1;
+    padding: 10px;
+}
+.tituloCadastrarTarefa {
+    font-family: fantasy;
+    color: red;
+    text-align: center;
+}
+.containerDescricaoTarefas {
+    max-height: 300px;
+    overflow-y: scroll;
+    border: 1px solid #ccc;
+    padding: 10px;
+    width: 100%;
+}
+.inputEBotaoDescricao {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+}
+.caixaDeTextoDescricao {
+    flex: 1;
+    color: white;
+    background-color: gray;
+    margin-right: 10px;
+    padding: 5px;
+}
+.grafico {
+    flex: 1;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* CSS do arquivo Cadastrar.jsx */
+.containerCadastrar {
+    display: block;
+}
+
+.labelEInput {
+    display: block;
+    padding-left: 35px;
+}

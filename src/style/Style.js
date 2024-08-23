@@ -1,14 +1,11 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  height: 97vh;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  // justify-content: space-between;
   background-color: ${({ theme }) => theme.background};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 `;
 
 export const Switch = styled.button`
